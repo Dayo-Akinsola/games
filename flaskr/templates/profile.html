@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block main %}
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;" id="profile-sidebar">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <span class="fs-4">Profile</span>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a href="#" class="nav-link text-white" aria-current="page">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-white">
+                    Friends
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-white">
+                    Games Owned
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-white">
+                    Genre Preferences
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-white">
+                    Recommendations
+                </a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+
