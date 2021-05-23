@@ -2,16 +2,28 @@ import os
 
 from flask import Flask
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 from .helpers import error_message
+
+db =SQLAlchemy()
+migrate = Migrate()
 
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
         SECRET_KEY='dev',
-        DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite')
+        SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
+            'sqlite:///' + os.path.join(app.instance_path, 'flaskr.sqlite'),
+        SQLALCHEMY_TRACK_MODIFICATIONS = False
     )
+
+    db.init_app(app)
+    migrate.init_app(app, db)
+
+    from . import models
 
     # Ensure templates are auto-reloaded
     app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -41,8 +53,8 @@ def create_app(test_config=None):
     from . import application
     app.register_blueprint(application.bp)
 
-    from . import db
-    db.init_app(app)
+    #from . import db
+    #db.init_app(app)
 
     def errorhandler(e):
         """Handle error"""
