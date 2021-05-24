@@ -7,7 +7,10 @@ from flask import Flask, flash, redirect, render_template, request, session, Blu
 from flask_session import Session 
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
-from flaskr.db import get_db
+#from flaskr.db import get_db
+from flaskr import db 
+from flaskr.models import User
+
 
 from .helpers import error_message, login_required 
 
@@ -25,35 +28,36 @@ def index():
 @bp.route('/login', methods=["GET", "POST"])
 def login():
     session.clear()
-    db = get_db()
+    #db = get_db()
 
     if request.method == "POST":
-        username = request.form.get("username")
-        password = request.form.get("password")
+        user_name = request.form.get("username")
+        pass_word = request.form.get("password")
 
         # Check that a username an password were inputted
 
-        if not username:
+        if not user_name:
             return error_message("Please provide your username!", 403)
         
-        if not password:
+        if not pass_word:
             return error_message("Please provide your password!", 403)
         
         # Query database for all usernames
-        users = db.execute("SELECT * FROM user WHERE username = ?", [username]).fetchone()
-        print(users)
+        #users = db.execute("SELECT * FROM user WHERE username = ?", [username]).fetchone()
+        user = User.query.filter_by(username=user_name).first()
+        print(user)
 
         # Check if username and password exist in the database
 
-        if users is None:
+        if user is None:
             return error_message("Please provide a valid username/password!", 403)
         
-        if not check_password_hash(users["password"], password):
+        if not check_password_hash(user.password, pass_word):
             return error_message("Please provide a valid username/password!", 403)
         
         # Remember user who logged in
 
-        session["user_id"] = users["id"]
+        session["user_id"] = user.id
 
         return redirect("/profile")
 
@@ -63,23 +67,24 @@ def login():
 @bp.route('/register', methods=["GET", "POST"])
 def register():
     session.clear()
-    db = get_db()
+    #db = get_db()
 
     if request.method == "POST":
-        username = request.form.get("username")
+        user_name = request.form.get("username")
         password = request.form.get("password")
         confirmation = request.form.get("confirmation")
 
         # Check that user name was inputted
-        if not username:
+        if not user_name:
             return error_message("You must input a username!", 400)
         
         # Query database to check is username 
 
-        users = db.execute("SELECT * FROM user WHERE username = ?", [username])
-        print(users)
+        #users = db.execute("SELECT * FROM user WHERE username = ?", [username])
+        user = User.query.filter_by(username=user_name).first()
+        print(user)
 
-        if users.fetchone() is not None:
+        if user is not None:
             return error_message("This username already exists!", 400)
         
         # Check that password was inputted
@@ -96,9 +101,11 @@ def register():
         # Generate password hash for user
         pass_hash = generate_password_hash(password)
 
-        db.execute("INSERT INTO user (username, password) VALUES (?, ?)", (username, pass_hash))
+        #db.execute("INSERT INTO user (username, password) VALUES (?, ?)", (username, pass_hash))
+        new_user = User(username=user_name, password=pass_hash)
+        db.session.add(new_user) 
 
-        db.commit()
+        db.session.commit()
 
         return redirect("/login")
         
