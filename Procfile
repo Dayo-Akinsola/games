@@ -1,1 +1,1 @@
-heroku config:set SECRET_KEY="`< /dev/urandom tr -dc 'a-zA-Z0-9' | head -c16`"
+"web: flask db upgrade; gunicorn task_list:'create_app()'" 
