@@ -1,1 +1,1 @@
-"web: flask db upgrade; gunicorn flaskr:'create_app()'" 
+"web: flask db upgrade; gunicorn games:'create_app()'" 
