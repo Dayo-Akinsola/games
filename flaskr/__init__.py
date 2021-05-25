@@ -15,7 +15,7 @@ def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
         SECRET_KEY='dev',
-        SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
+        SQLALCHEMY_DATABASE_URI = os.environ.get('postgresql://wwdshzwaaqvose:8e07fc4a7675638df62c26930d39edd4e21c919a548a9cc9de3ca61b2b0b6aee@ec2-3-218-71-191.compute-1.amazonaws.com:5432/datrghjavahhuq') or \
             'sqlite:///' + os.path.join(app.instance_path, 'flaskr.sqlite'),
         SQLALCHEMY_TRACK_MODIFICATIONS = False
     )
