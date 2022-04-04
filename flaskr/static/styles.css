@@ -14,12 +14,66 @@
   }
 
 
+main{
+  max-height: 100%;
+  display: block;
+}
+
+a{
+  text-decoration: none;
+  color: #212529
+}
+
+a:link {
+  color:#212529;
+}
+
+.parallax-background {
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+  -moz-filter: blur(8px);
+  -webkit-filter: blur(8px); 
+  filter: blur(8px); 
+  transform: scale(1.1);
+  background-color: #212529;
+}
+
+img, svg {
+  vertical-align: middle;
+  width: 100%;
+  height: 442px;
+}
+
+.parallax-container{
+  width: 100%;
+  margin-bottom: 100px;
+  height: 442px;
+  
+
+}
+
+a:hover{
+  color: #3d4242;
+}
+
 .px-3 {
-  padding-bottom: 18rem;
+  padding-bottom: 100%;
+}
+
+#table-data{
+  color: antiquewhite;
 }
 
 .cover-heading {
   font-size: 3.2rem;
+}
+
+#site-header{
+  max-width: 100%;
+  background-color: #212529;
+  
 }
 
 .bg-dark{
@@ -48,10 +102,16 @@ box-shadow: inset 0 0 0 rgb(0 0 0 / 50%);
 
 #index-heading {
   position: fixed;
-  top: 200px;
+  top: 250px;
   left: 420px;
-  right: 100px;
+  right: 420px;
+  
+}
 
+#search-button{
+  position: relative;
+  left: 185px;
+  bottom: 37px;
 }
 
 #login {
@@ -79,4 +139,101 @@ box-shadow: inset 0 0 0 rgb(0 0 0 / 50%);
 
 .nav-link {
   padding-bottom: 25px;
+}
+
+
+
+#header-search{
+  position: relative;
+  left: 150px;
+  width: 400px;
+}
+
+#gametitle-container{
+  
+    max-width: 650px;
+    position: relative;
+    top: -200px;
+    font-size: 10px;
+    background-color: rgb(220 220 220 / 20%);
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.price-table{
+  position: relative;
+}
+
+.about-section{
+  display: flex;
+}
+
+#about-container{
+  float: left;
+  width: 560px;
+  margin-left: 45px;
+}
+
+.col-sm-3{
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+
+.col-sm-9{
+ min-width: 576px;
+}
+
+.row{
+  --bs-gutter-x: -10px;
+}
+
+.game-info-section{
+  margin-top: 15px;
+}
+
+.table-dark{
+  float: left;
+  width: 370px;
+  margin-right: 50px;
+}
+
+#game-name{
+  font-weight: 650;
+  margin-bottom: 20px;
+}
+
+.card{
+  flex-direction: row;
+  margin-top: 20px;
+
+}
+
+.card-body{
+  text-align: initial;
+  background-color: #e2e7ef;
+  padding: 0.25rem 0.25rem;
+}
+
+.card-title{
+  text-align: initial;
+}
+
+.card .bg-dark{
+  border-radius: 80%;
+}
+
+.card-img{
+  width: 264px;
+  height: 264px;
+}
+
+
+.row .row-cols-1 .row-cols-sm-2 .row-cols-md-3{
+  width: 80%;
+  border-radius: 50%;
+}
+
+.row{
+  --bs-gutter-x: 0;
 }

@@ -3,6 +3,8 @@ import os
 import functools
 import datetime
 import sqlite3
+import requests
+import json
 from flask import Flask, flash, redirect, render_template, request, session, Blueprint, g, url_for
 from flask_session import Session 
 from tempfile import mkdtemp
@@ -12,7 +14,7 @@ from flaskr import db
 from flaskr.models import User
 
 
-from .helpers import error_message, login_required 
+from .helpers import error_message, find_game, login_required, game_details, find_prices, int_to_roman
 
 
 # Create a blueprint to run in __init__.py
@@ -34,6 +36,7 @@ def login():
         user_name = request.form.get("username")
         pass_word = request.form.get("password")
 
+        print(user_name)
         # Check that a username an password were inputted
 
         if not user_name:
@@ -45,7 +48,7 @@ def login():
         # Query database for all usernames
         #users = db.execute("SELECT * FROM user WHERE username = ?", [username]).fetchone()
         user = User.query.filter_by(username=user_name).first()
-        print(user)
+        #print(user)
 
         # Check if username and password exist in the database
 
@@ -57,8 +60,8 @@ def login():
         
         # Remember user who logged in
 
-        session["user_id"] = user.id
-
+        session["user_id"] = user.id     
+      
         return redirect("/profile")
 
     return render_template("login.html")
@@ -68,11 +71,13 @@ def login():
 def register():
     session.clear()
     #db = get_db()
-
+    
     if request.method == "POST":
         user_name = request.form.get("username")
         password = request.form.get("password")
         confirmation = request.form.get("confirmation")
+
+        print(user_name)
 
         # Check that user name was inputted
         if not user_name:
@@ -90,7 +95,7 @@ def register():
         # Check that password was inputted
         if not password:
             return error_message("You must input a password!", 400)
-        
+    
         # Check that password confirmation matches password
         if not confirmation:
             return error_message("You must confirm your password!", 400)
@@ -106,6 +111,8 @@ def register():
         db.session.add(new_user) 
 
         db.session.commit()
+
+        
 
         return redirect("/login")
         
@@ -132,3 +139,36 @@ def profile():
 
     return render_template("profile.html")
 
+# Gives a page of results that match a search inputted by the user
+@bp.route('/search')
+def search():
+    name = request.args.get("g")
+
+    results = find_game(name)
+
+    print(results)
+    return render_template("search.html", results=results)
+
+# Displays the details of a game when clicked by a user
+@bp.route('/game/<slug>')
+def game_page(slug):
+
+    game = game_details(slug)
+    background_screenshot = game[0]['screenshots'][0]['url'].replace("t_thumb", "t_screenshot_big")
+    print(game)
+
+    plain = ''
+    for char in slug:
+        if char.isnumeric() == True:
+            numeral = int_to_roman(int(char))
+            char = numeral
+        plain += char
+    
+    print(plain)
+
+    prices = find_prices(plain.replace('-', '').replace('slash', ''))
+    
+
+    data = prices['data'][plain.replace('-', '').replace('slash', '')]['list']
+
+    return render_template("game.html", plain=plain, game=game, background_screenshot=background_screenshot, data=data)

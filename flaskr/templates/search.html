@@ -1,0 +1,26 @@
+{% extends "layout.html" %} 
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for result in results %}
+            <div class="col gx-3">
+                <div class="card bg-dark card">
+                    <img src=" {{result['cover']}} "  class="card-img" alt="portal.jpg">
+                    <div class="card-body">
+                        <a href="/game/{{result['slug']}}">
+                        <h1 class="card-title" style="font-size: 2.1rem;">{{result['title']}}</h1>
+                        </a>
+                        <p class="card-text">{{result['genre']}}</p>
+                        <p class="card-text">{{result['release_date']}}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

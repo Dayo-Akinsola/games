@@ -1,0 +1,30 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"python.pythonPath": "C:\\Users\\dayoa\\AppData\\Local\\Programs\\Python\\Python39\\python.exe"
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Python: Flask",
+				"type": "python",
+				"request": "launch",
+				"module": "flask",
+				"env": {
+					"FLASK_APP": "application.py",
+					"FLASK_ENV": "development"
+				},
+				"args": [
+					"run",
+					"--no-debugger"
+				],
+				"jinja": true
+			}
+		]
+	}
+}

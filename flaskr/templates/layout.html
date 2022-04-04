@@ -29,6 +29,7 @@
         <!-- Custom styles for this template -->
         <link href="/static/cover.css" rel="stylesheet">
         <link href="/static/sidebars.css" rel="stylesheet"> 
+        <link href="/static/headers.css" rel="stylesheet">
 
         <link href="/static/styles.css" rel="stylesheet"> 
 
@@ -38,8 +39,8 @@
 
     </head>
 
-    <body class="d-flex h-100 text-center text-white bg-dark">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <body class="text-center text-white bg-dark">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" id="site-header">
         <header class="mb-auto">
             <div>
                 <h3 class="float-md-start mb-0 link" href="/">GamersConnect</h3>
@@ -58,12 +59,20 @@
                 <a class="nav-link" href="/logout">Log Out</a>
             </nav>
         {% endif %} 
+            <form action='/search' class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                <div class="form-group">
+                    <input name="g" type="text" class="form-control" placeholder="Search" aria-label="Search" id="header-search" >
+                </div>
+                <button type="button" class="btn btn-outline-light me-2" id="search-button">Search</button>
+            </form>
+
+            
             </div>
         </header>
     </div> 
         <main class="px-3">
             {% block main %}{% endblock %}
-        </main>
+         </main>
     
     
     </body>
