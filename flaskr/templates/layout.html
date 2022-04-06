@@ -8,7 +8,7 @@
         <meta name="description" content="">
         <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
         <meta name="generator" content="Hugo 0.83.1">
-        <title>GamersConnect</title>
+        <title>GameDeal</title>
 
         <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/cover/">
 
@@ -35,7 +35,7 @@
 
 
                 
-        <title>GamersConnect: {% block title %}{% endblock %}</title>
+        <title>GameDeal: {% block title %}{% endblock %}</title>
 
     </head>
 
@@ -43,7 +43,7 @@
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" id="site-header">
         <header class="mb-auto">
             <div>
-                <h3 class="float-md-start mb-0 link" href="/">GamersConnect</h3>
+                <h3 class="float-md-start mb-0 link" href="/">GameDeal</h3>
         {% if not session.user_id %}
             <nav class="nav nav-masthead justify-content-center float-md-end">
                 <a class="nav-link active" aria-current="page" href="/">Home</a>  
@@ -61,12 +61,9 @@
         {% endif %} 
             <form action='/search' class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
                 <div class="form-group">
-                    <input name="g" type="text" class="form-control" placeholder="Search" aria-label="Search" id="header-search" >
+                    <input name="g" type="text" class="form-control" placeholder="Search Games" aria-label="Search" id="header-search" >
                 </div>
-                <button type="button" class="btn btn-outline-light me-2" id="search-button">Search</button>
-            </form>
-
-            
+            </form>            
             </div>
         </header>
     </div> 

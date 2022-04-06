@@ -18,65 +18,67 @@
 
 
     <div class="col price-table">
-        <h2><u>About</u></h2>
-        <table class="table table-dark table=striped">
-            <thead>
-                <th scope="col">Store</th>
-                <th scope="col">Price</th>
-            </thead>   
-            <tbody>
-                {% for game in data %}
-                    <tr>
-                        <td ><a href="{{game['url']}}" id="table-data">{{game['shop']['name']}}</a></td>
-                        <td>£{{game['price_new']}}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <div container id="about-container">
-            <div class="about-section">
-                {{game[0]['summary']}}
-            </div>
-            <div class="game-info-section">
-            <dl class="row">
-                    <dd class="col-sm-9">
-                        <b>Genres:</b>
-                        {% for genre in game[0]['genres'][:2] %}
-                            {{genre.name}}
-                        {% if not loop.last %}
-                            ,
-                        {% endif %}
-                        {% endfor %}
-                    </dd>
-            </dl>
-            <dl class="row">
-                    <dd class="col-cm-9">
-                        <b>Consoles:</b>
-                        {% for console in game[0]['platforms'] %}
-                            {{console['name']}}
-                        {% if not loop.last %}
-                            ,
-                        {% endif %}
-                        {% endfor %}
-                    </dd>
-            </dl>
-            <dl class="row">
-                <dd class="col-cm-9">
-                    <b>Developer:</b>
-                    {{game[0]['involved_companies'][0]['company']['name']}}
-                </dd>
-            </dl>
-            <dl class="row">
-                <dd class="col-cm-9">
-                    <b>Publishers:</b>
-                    {% for publisher in game[0]['involved_companies'][1:] %}    
-                        {{publisher['company']['name']}}
-                    {% if not loop.last %}
-                        ,
-                    {% endif %}
+        <div class="details-container">
+            <table class="table table-dark table=striped">
+                <thead>
+                    <th scope="col">Store</th>
+                    <th scope="col">Price</th>
+                </thead>   
+                <tbody>
+                    {% for game in data %}
+                        <tr>
+                            <td ><a href="{{game['url']}}" id="table-data">{{game['shop']['name']}}</a></td>
+                            <td>£{{game['price_new']}}</td>
+                        </tr>
                     {% endfor %}
-                </dd>
-            </dl>
+                </tbody>
+            </table>
+            <div container id="about-container">
+                <div class="about-section">
+                    <h2><u>About</u></h2>
+                    {{game[0]['summary']}}
+                </div>
+                <div class="game-info-section">
+                <dl class="row">
+                        <dd class="col-sm-9">
+                            <b>Genres:</b>
+                            {% for genre in game[0]['genres'][:2] %}
+                                {{genre.name}}
+                            {% if not loop.last %}
+                                ,
+                            {% endif %}
+                            {% endfor %}
+                        </dd>
+                </dl>
+                <dl class="row">
+                        <dd class="col-cm-9">
+                            <b>Consoles:</b>
+                            {% for console in game[0]['platforms'] %}
+                                {{console['name']}}
+                            {% if not loop.last %}
+                                ,
+                            {% endif %}
+                            {% endfor %}
+                        </dd>
+                </dl>
+                <dl class="row">
+                    <dd class="col-cm-9">
+                        <b>Developer:</b>
+                        {{game[0]['involved_companies'][0]['company']['name']}}
+                    </dd>
+                </dl>
+                <dl class="row">
+                    <dd class="col-cm-9">
+                        <b>Publishers:</b>
+                        {% for publisher in game[0]['involved_companies'][1:] %}    
+                            {{publisher['company']['name']}}
+                        {% if not loop.last %}
+                            ,
+                        {% endif %}
+                        {% endfor %}
+                    </dd>
+                </dl>
+            </div>
         </div>
         </div>
     </div>
