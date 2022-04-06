@@ -7,4 +7,4 @@ GameDeal is an app that allows you to search for games and check if there are an
 ## Tech Used
 Python, Flask, SQLite, Jinja, HTML, CSS
 
-The games were collected from the RAWG API and the deals were from IsThereAnyDeal API.
+The games were collected from the RAWG API and the deals were from the IsThereAnyDeal API.
